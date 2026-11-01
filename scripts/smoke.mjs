@@ -60,5 +60,28 @@ ok("SP reply sent", await page.getByText("On it, Alex is checking the A2 motor n
 await page.getByRole("button", { name: /Harborview/ }).click()
 ok("not-a-ticket shown in history", (await page.getByText("Not a ticket").count()) > 0)
 
+// Analytics: chain card opens the drawer
+await page.goto(base + "/analytics/?org=pinewood&scope=all", { waitUntil: "networkidle" })
+await page.locator('[data-testid="chain-card"]').first().click()
+ok("analytics drawer opens", await page.locator('[data-testid="analytics-drawer"]').isVisible())
+await page.keyboard.press("Escape")
+
+// Ask: example question returns a rendered chart
+await page.goto(base + "/ask/?org=pinewood", { waitUntil: "networkidle" })
+await page.getByRole("button", { name: "Weekly revenue by chain since August" }).click()
+await page.waitForSelector('[data-testid="ask-visual"]', { timeout: 15000 })
+ok("ask returns a chart", (await page.locator('[data-testid="ask-visual"][data-kind="stacked"] svg .recharts-bar-rectangle').count()) > 0)
+
+// Bank sync: accept a transaction, then create a rule
+await page.goto(base + "/money/bank/?org=northline", { waitUntil: "networkidle" })
+const rows0 = await page.locator('[data-testid="txn-row"]').count()
+await page.locator('[data-testid="txn-row"]').first().getByRole("button", { name: /^(Accept|Confirm)$/ }).click()
+ok("bank transaction accepted", (await page.locator('[data-testid="txn-row"]').count()) === rows0 - 1)
+const rules0 = Number((await page.getByRole("tab", { name: /Rules/ }).innerText()).replace(/\D/g, ""))
+await page.locator('[data-testid="txn-row"]').first().getByRole("button", { name: "More" }).click()
+await page.getByRole("menuitem", { name: /Always do this/ }).click()
+await page.getByRole("tab", { name: /Rules/ }).click()
+ok("rule created", (await page.locator('[data-testid="rules"] li').count()) === rules0 + 1)
+
 console.log(errors.length ? `\nErrors:\n${errors.join("\n")}` : "\nNo console errors")
 await browser.close()

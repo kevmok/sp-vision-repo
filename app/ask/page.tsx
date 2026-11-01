@@ -1,5 +1,5 @@
-import { AskPlaceholder } from "@/components/sp/placeholder"
+import { AskPage } from "@/components/ask/ask-page"
 
 export default function Page() {
-  return <AskPlaceholder />
+  return <AskPage />
 }

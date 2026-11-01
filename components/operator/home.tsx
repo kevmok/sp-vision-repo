@@ -5,6 +5,7 @@ import {
   Check,
   CircleDashed,
   CirclePlus,
+  Landmark,
   MoonStar,
   PlugZap,
   RotateCcw,
@@ -19,6 +20,7 @@ import type { Machine, Org } from "@/lib/data"
 import { money, pct } from "@/lib/format"
 import { orgStats, setupSteps } from "@/lib/health"
 import { useOperatorOrg, useStore } from "@/lib/store"
+import { useBank } from "@/lib/bank-store"
 import { HOUR, NOW, fmtDate, fmtStamp } from "@/lib/time"
 import { cn } from "@/lib/utils"
 
@@ -28,7 +30,7 @@ type Alert = {
   tone: Tone
   icon: LucideIcon
   title: string
-  machine: Machine
+  machine?: Machine
   detail: string
   action: { label: string; href: string }
 }
@@ -261,7 +263,19 @@ function TopMachines({ org }: { org: Org }) {
 export function OperatorHome() {
   const org = useOperatorOrg()
   const st = orgStats(org)
+  const { inbox } = useBank()
   const alerts = alertsFor(org)
+  if (inbox.length) {
+    alerts.push({
+      key: "bank",
+      severity: 4,
+      tone: "copper",
+      icon: Landmark,
+      title: `${inbox.length} new bank transactions to categorize`,
+      detail: `${inbox.filter((t) => t.confidence >= 0.9).length} ready to accept · ${inbox.filter((t) => t.match).length} match records already in SP`,
+      action: { label: "Review", href: "/money/bank" },
+    })
+  }
   const vends = Math.round(st.revenueToday / 6.4)
 
   return (
@@ -322,9 +336,13 @@ export function OperatorHome() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 text-[13px]">
                       <span className="font-semibold">{a.title}</span>
-                      <span className="text-muted-foreground">·</span>
-                      <span className="truncate">{a.machine.venue}</span>
-                      <span className="num text-[11px] text-muted-foreground">{a.machine.id}</span>
+                      {a.machine && (
+                        <>
+                          <span className="text-muted-foreground">·</span>
+                          <span className="truncate">{a.machine.venue}</span>
+                          <span className="num text-[11px] text-muted-foreground">{a.machine.id}</span>
+                        </>
+                      )}
                     </div>
                     <div className="mt-0.5 truncate text-[12px] text-muted-foreground">{a.detail}</div>
                   </div>

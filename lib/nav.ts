@@ -1,6 +1,9 @@
 import {
   Activity,
   BarChart3,
+  ChartLine,
+  Landmark,
+  MessageSquareText,
   Building2,
   ClipboardList,
   HeartPulse,
@@ -39,11 +42,19 @@ export const OPERATOR_PRODUCTS: NavProduct[] = [
       { title: "P&L", href: "/pnl", icon: BarChart3 },
       { title: "Statements", href: "/statements", icon: ScrollText },
       { title: "Sales tax", href: "/sales-tax", icon: Receipt },
+      { title: "Bank sync", href: "/money/bank", icon: Landmark },
+    ],
+  },
+  {
+    title: "Insights",
+    icon: Sparkles,
+    pages: [
+      { title: "Analytics", href: "/analytics", icon: ChartLine },
+      { title: "Ask", href: "/ask", icon: MessageSquareText },
     ],
   },
   { title: "Hosts", icon: Building2, href: "/hosts", pages: [{ title: "Hosts", href: "/hosts", icon: Building2 }] },
   { title: "Team", icon: Users, href: "/team", pages: [{ title: "Team", href: "/team", icon: Users }] },
-  { title: "Ask your data", icon: Sparkles, href: "/ask", pages: [{ title: "Ask your data", href: "/ask", icon: Sparkles }] },
   { title: "Growth", icon: Rocket, href: "/growth", pages: [{ title: "Growth", href: "/growth", icon: Rocket }] },
   { title: "Support", icon: LifeBuoy, href: "/support", pages: [{ title: "Support", href: "/support", icon: LifeBuoy }] },
 ]

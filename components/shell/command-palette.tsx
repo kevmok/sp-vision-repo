@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { HeartPulse } from "lucide-react"
+import { HeartPulse, Sparkles } from "lucide-react"
 
 import {
   CommandDialog,
@@ -17,7 +17,9 @@ import {
 import { OrgTile, SpLogo } from "@/components/sp/brand"
 import { useOrgSwitch } from "@/components/shell/org-switcher"
 import { ORGS } from "@/lib/data"
-import { ADMIN_PAGES, OPERATOR_PRODUCTS } from "@/lib/nav"
+import { ADMIN_PAGES, OPERATOR_PRODUCTS, crumbs } from "@/lib/nav"
+import { useAsk } from "@/lib/ask-store"
+import { usePath } from "@/lib/use-path"
 
 const PaletteContext = React.createContext<{ open: boolean; setOpen: (o: boolean) => void }>({
   open: false,
@@ -48,7 +50,10 @@ export function PaletteProvider({ children }: { children: React.ReactNode }) {
 
 function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (o: boolean) => void }) {
   const router = useRouter()
+  const path = usePath()
   const { isAdmin, toAdmin, toOperator } = useOrgSwitch()
+  const { ask, openSheet } = useAsk()
+  const [search, setSearch] = React.useState("")
   const go = (fn: () => void) => {
     setOpen(false)
     fn()
@@ -57,7 +62,7 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (o: boolean
   return (
     <CommandDialog open={open} onOpenChange={setOpen} className="top-[12%] shadow-[0_24px_60px_-12px_rgba(27,26,23,0.35)] sm:max-w-xl" title="Jump to">
       <Command loop>
-        <CommandInput placeholder="Jump to a product, page or operator" />
+        <CommandInput placeholder="Jump to a product, page or operator" value={search} onValueChange={setSearch} />
         <CommandList className="max-h-[420px]">
           <CommandEmpty>No matches</CommandEmpty>
           {isAdmin && (
@@ -123,6 +128,25 @@ function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (o: boolean
               SP Vending (admin)
             </CommandItem>
           </CommandGroup>
+          {!isAdmin && search.trim().length > 2 && (
+            <CommandGroup heading="Ask">
+              <CommandItem
+                forceMount
+                value={`ask-${search}`}
+                onSelect={() =>
+                  go(() => {
+                    const q = search
+                    setSearch("")
+                    if (path === "/ask") ask(q)
+                    else openSheet(q, crumbs(path).at(-1))
+                  })
+                }
+              >
+                <Sparkles className="text-copper" />
+                <span className="truncate">Ask “{search}”</span>
+              </CommandItem>
+            </CommandGroup>
+          )}
         </CommandList>
       </Command>
     </CommandDialog>

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { usePathname } from "next/navigation"
+import { usePath } from "@/lib/use-path"
 import { Search } from "lucide-react"
 
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
@@ -11,11 +11,14 @@ import { AppSidebar } from "@/components/shell/app-sidebar"
 import { PaletteProvider, usePalette } from "@/components/shell/command-palette"
 import { crumbs } from "@/lib/nav"
 import { StoreProvider } from "@/lib/store"
+import { BankProvider } from "@/lib/bank-store"
+import { AskProvider } from "@/lib/ask-store"
+import { AskLauncher } from "@/components/ask/ask-sheet"
 import { fmtDay } from "@/lib/time"
 import { useStore } from "@/lib/store"
 
 function Topbar() {
-  const pathname = usePathname()
+  const pathname = usePath()
   const { setOpen } = usePalette()
   const { now } = useStore()
   const parts = crumbs(pathname)
@@ -51,6 +54,8 @@ function Topbar() {
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <StoreProvider>
+      <BankProvider>
+      <AskProvider>
       <TooltipProvider delay={150}>
         <PaletteProvider>
           <SidebarProvider>
@@ -58,10 +63,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <SidebarInset className="min-w-0 bg-cream">
               <Topbar />
               <div className="flex min-h-0 flex-1 flex-col">{children}</div>
+              <AskLauncher />
             </SidebarInset>
           </SidebarProvider>
         </PaletteProvider>
       </TooltipProvider>
+      </AskProvider>
+      </BankProvider>
     </StoreProvider>
   )
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePath } from "@/lib/use-path"
 
 import {
   Sidebar,
@@ -28,7 +28,7 @@ const activeCls =
   "data-active:bg-card data-active:shadow-[0_0_0_1px_var(--hairline)] data-active:[&>svg]:text-copper"
 
 export function AppSidebar() {
-  const pathname = usePathname()
+  const pathname = usePath()
   const isAdmin = pathname.startsWith("/admin")
   const { tickets, operatorOrgId } = useStore()
   const org = useOperatorOrg()

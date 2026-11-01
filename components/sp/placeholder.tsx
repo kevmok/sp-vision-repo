@@ -1,6 +1,6 @@
 "use client"
 
-import { Download, Plus, Sparkles } from "lucide-react"
+import { Download, Plus } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -208,51 +208,6 @@ export function Placeholder({ id }: { id: keyof typeof CONFIGS | string }) {
             </div>
           </Panel>
         )}
-      </div>
-    </Page>
-  )
-}
-
-const SAMPLE_QUESTIONS = [
-  "Which machines made the most profit last week?",
-  "What sells best at laundromats?",
-  "How much do I owe hosts this month?",
-  "Which lanes run out fastest?",
-]
-
-export function AskPlaceholder() {
-  return (
-    <Page>
-      <PageHeader title="Ask your data" />
-      <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-4">
-        <div className="flex items-center gap-3 rounded-xl border border-input bg-card px-4 py-3.5 shadow-[0_1px_0_rgba(27,26,23,0.03)]">
-          <Sparkles className="size-4 text-copper" />
-          <input
-            className="flex-1 bg-transparent text-[14px] outline-none placeholder:text-muted-foreground"
-            placeholder="Ask about sales, machines, hosts or profit"
-          />
-          <Button size="sm">Ask</Button>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
-          {SAMPLE_QUESTIONS.map((q) => (
-            <button
-              key={q}
-              className="rounded-lg border border-hairline bg-card px-3 py-2.5 text-left text-[13px] transition-colors hover:border-[#d6d0c4]"
-            >
-              {q}
-            </button>
-          ))}
-        </div>
-        <Panel className="mt-4" title="Recent answers">
-          <div className="flex flex-col gap-3 p-4">
-            {[90, 70, 82].map((w, i) => (
-              <div key={i} className="flex flex-col gap-1.5">
-                <Skeleton className="h-3 rounded bg-[#efece5]" style={{ width: `${w - 30}%` }} />
-                <Skeleton className="h-2.5 rounded bg-[#f3f1ec]" style={{ width: `${w}%` }} />
-              </div>
-            ))}
-          </div>
-        </Panel>
       </div>
     </Page>
   )

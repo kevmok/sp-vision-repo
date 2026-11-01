@@ -1,6 +1,7 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { usePath } from "@/lib/use-path"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import {
@@ -19,7 +20,7 @@ import { useOperatorOrg, useStore } from "@/lib/store"
 
 export function useOrgSwitch() {
   const router = useRouter()
-  const pathname = usePathname()
+  const pathname = usePath()
   const { setOperatorOrgId } = useStore()
   const isAdmin = pathname.startsWith("/admin")
   return {
