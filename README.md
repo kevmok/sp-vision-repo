@@ -70,3 +70,9 @@ pnpm dlx shadcn@latest add sidebar card badge table tabs dialog command avatar d
 - The generated files were changed in three places: the dialog backdrop blur was removed, `hooks/use-mobile.ts` now uses `useSyncExternalStore` (the React 19 lint rule rejects setState inside an effect), and dark mode and `next-themes` were dropped.
 
 Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind v4, lucide-react. No chart library.
+
+## Live preview
+
+https://sp-pocs.mok-kevin11.workers.dev (static export on Cloudflare Workers static assets; `noindex` via robots.txt).
+
+The app is exported as static HTML (`output: "export"` in `next.config.ts`), so it needs no server. To redeploy: `pnpm run deploy` (needs `wrangler login`). Screenshots are copied into `public/screenshots/` so Notion can show them by URL.
