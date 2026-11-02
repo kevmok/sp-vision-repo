@@ -1,0 +1,42 @@
+/* SP Vending's look for stages, mapped from app/globals.css. Every SP stage
+   puts `sp-look` on its Stage so the faux UI reads as the real app. */
+
+.sp-look .ss-stage {
+  --ss-font: var(--font-sans), system-ui, sans-serif;
+  --ss-mono: var(--font-mono), ui-monospace, monospace;
+
+  /* Sidebar on #f4f2ec, the content column on cream, cards white */
+  --ss-canvas: #f4f2ec;
+  --ss-surface: #faf9f6;
+  --ss-chrome: #faf9f6;
+  --ss-raised: #ffffff;
+  --ss-well: #efece4;
+
+  --ss-line: #ebe8e1;
+  --ss-line-faint: #f2f0ea;
+
+  --ss-text-strong: #1b1a17;
+  --ss-text: #6e6a61;
+  --ss-text-faint: #9a958a;
+  --ss-icon: #6e6a61;
+  --ss-icon-faint: #c9c4b8;
+
+  --ss-accent: #b3631c;
+  --ss-accent-soft: #f7ead8;
+  --ss-accent-text: #8a4913;
+
+  --ss-success: #3f8f53;
+  --ss-success-soft: #e6f1e8;
+  --ss-success-text: #2f6d3f;
+  --ss-warning: #b07d12;
+  --ss-warning-soft: #f6edd6;
+  --ss-warning-text: #85600e;
+  --ss-danger: #bf4a3c;
+  --ss-danger-soft: #f6e3e0;
+  --ss-danger-text: #9a3a2f;
+
+  --ss-radius-sm: 6px;
+  --ss-radius-md: 8px;
+  --ss-radius-lg: 11px;
+  --ss-radius-window: 12px;
+}

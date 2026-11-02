@@ -1,0 +1,277 @@
+.ut .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and sides, the orgs running off the bottom */
+.ut .ut-win {
+  position: absolute;
+  top: 32px;
+  left: 56px;
+  width: 768px;
+  height: 540px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.ut .ut-body {
+  height: 100%;
+  padding: 20px 20px 0;
+  background: var(--ss-surface);
+}
+
+/* Phone column: the card alone */
+.ut .ut-solo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 310px;
+}
+
+.ut .ut-solo .ut-card {
+  box-shadow: var(--ss-shadow-hero);
+}
+
+/* The headline's column is the org names' column; the chart's is their weeks' */
+.ut .ut-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 168px 504px;
+  column-gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.ut .ss-stage[data-layout="compact"] .ut-card {
+  grid-template-columns: 282px;
+  padding: 18px 14px;
+}
+
+.ut .ut-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.ut .ut-chip {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--ss-ink-1);
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* In the title bar its edge lines up with the card's below */
+.ut .ut-win .ut-chip {
+  margin-right: 6px;
+}
+
+.ut .ut-head {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  justify-items: start;
+}
+
+.ut .ut-label {
+  color: var(--ss-text);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* The board's own "8/10": ink for the count, muted for the total */
+.ut .ut-value {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--ss-text-strong);
+  font-family: var(--ss-mono);
+  font-size: 34px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.ut .ut-of {
+  margin-left: 1px;
+  color: var(--ss-text-faint);
+}
+
+.ut .ut-week {
+  color: var(--ss-text);
+  font-size: 12.5px;
+}
+
+.ut .ut-plot {
+  position: relative;
+}
+
+.ut .ut-line {
+  position: relative;
+}
+
+/* The week under the pointer: a hairline from the line down through the orgs */
+.ut .ut-hair {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  width: 1px;
+  height: 460px;
+  margin-left: -0.5px;
+  background: #d6d0c4;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.ut .ss-stage[data-layout="compact"] .ut-hair {
+  height: 100%;
+}
+
+.ut .ut-dot {
+  position: absolute;
+  z-index: 3;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 2px solid var(--ss-raised);
+  border-radius: 50%;
+  background: var(--ss-accent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.ut .ut-hair[data-on],
+.ut .ut-dot[data-on] {
+  opacity: 1;
+}
+
+/* The target: dashed until the line reaches it, then green */
+.ut .ut-target {
+  position: absolute;
+  z-index: 1;
+  height: 0;
+  border-top: 1px dashed #c9c4b8;
+  transition: border-color 0.25s ease;
+}
+
+.ut .ut-target[data-reached] {
+  border-top-color: var(--ss-success);
+}
+
+.ut .ut-target-label {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.ut .ut-target-label svg {
+  flex: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ut .ut-target[data-reached] .ut-target-label {
+  color: var(--ss-success-text);
+}
+
+.ut .ut-target[data-reached] .ut-target-label svg {
+  opacity: 1;
+}
+
+.ut .ut-axis {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0 12px;
+  color: var(--ss-text-faint);
+  font-size: 11.5px;
+  line-height: 1.3;
+}
+
+/* A date keeps a clean patch where the hairline crosses it */
+.ut .ut-axis span {
+  margin: 0 -3px;
+  padding: 0 3px;
+  background: var(--ss-raised);
+}
+
+.ut .ut-rows {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+}
+
+.ut .ut-row {
+  display: grid;
+  grid-template-columns: 168px 504px;
+  column-gap: 16px;
+  align-items: center;
+  height: 26px;
+}
+
+.ut .ss-stage[data-layout="compact"] .ut-row {
+  grid-template-columns: 282px;
+  row-gap: 5px;
+  align-content: center;
+  height: 44px;
+}
+
+.ut .ut-name {
+  overflow: hidden;
+  color: var(--ss-text-faint);
+  font-size: 13px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.ut .ut-name[data-active] {
+  color: var(--ss-text-strong);
+}
+
+.ut .ut-cells {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.ut .ss-stage[data-layout="compact"] .ut-cells {
+  gap: 3px;
+}
+
+/* Quiet copper for every week they logged in, full copper for the week read */
+.ut .ut-cell {
+  height: 14px;
+  border-radius: 3px;
+  background: var(--ss-ink-1);
+  transition: background-color 0.12s ease;
+}
+
+.ut .ut-cell[data-on] {
+  background: #eccfa9;
+}
+
+.ut .ut-cell[data-week] {
+  background: var(--ss-ink-2);
+}
+
+.ut .ut-cell[data-on][data-week] {
+  background: var(--ss-accent);
+}

@@ -1,0 +1,309 @@
+.bm .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and sides, the inbox running off the bottom */
+.bm .bm-win {
+  position: absolute;
+  top: 32px;
+  left: 56px;
+  width: 768px;
+  height: 500px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.bm .bm-body {
+  height: 100%;
+  padding: 20px 20px 0;
+  background: var(--ss-surface);
+}
+
+/* Phone column: the inbox card alone, a gutter from the top and sides */
+.bm .bm-solo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 310px;
+}
+
+.bm .bm-solo .bm-card {
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.bm .bm-card {
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.bm .bm-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.bm .bm-title {
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.bm .bm-count {
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--ss-ink-2);
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* One grid for every row, so the columns line up */
+.bm .bm-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 40px 164px 96px 84px;
+  gap: 12px;
+  align-items: center;
+  min-height: 64px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--ss-line-faint);
+  color: var(--ss-text-strong);
+  font-size: 13px;
+}
+
+.bm .bm-row--labels {
+  min-height: 34px;
+  padding-block: 0;
+  border-top: 0;
+  border-bottom: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* Hover: an inset, rounded fill under the row's content */
+.bm .bm-row[data-focal]::before {
+  content: "";
+  position: absolute;
+  inset: 4px 6px;
+  border-radius: 8px;
+  background: var(--ss-ink-1);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.bm .bm-row[data-focal][data-hover]::before {
+  opacity: 1;
+}
+
+.bm .bm-row > * {
+  position: relative;
+}
+
+.bm .bm-date {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 12px;
+}
+
+.bm .bm-txn {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.bm .bm-merchant {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: var(--ss-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bm .bm-why {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 16px;
+  color: var(--ss-icon-faint);
+}
+
+/* The CRM match, in the product's copper chip */
+.bm .bm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px 4px 8px;
+  border-radius: 6px;
+  background: var(--ss-accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ss-accent) 22%, transparent);
+  color: var(--ss-accent-text);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.bm .bm-conf {
+  justify-self: end;
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: var(--ss-warning-soft);
+  color: var(--ss-warning-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+}
+
+.bm .bm-conf[data-high] {
+  background: var(--ss-success-soft);
+  color: var(--ss-success-text);
+}
+
+.bm .bm-conf-bar {
+  justify-self: end;
+}
+
+.bm .bm-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  border-radius: var(--ss-radius-md);
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+}
+
+.bm .bm-select-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bm .bm-select-chev {
+  flex: none;
+  color: var(--ss-icon);
+}
+
+.bm .bm-amt {
+  justify-self: end;
+  font-family: var(--ss-mono);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.bm .bm-row--labels .bm-amt {
+  font-family: var(--ss-font);
+  font-size: 11.5px;
+  letter-spacing: 0;
+}
+
+.bm .bm-cat-bar {
+  margin-left: 12px;
+}
+
+.bm .bm-amt-bar {
+  justify-self: end;
+}
+
+.bm .bm-act {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* The product's xs button: ink, one step of its own color under the pointer,
+   green only once it has matched */
+.bm .bm-btn {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 30px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background-color 0.25s ease, scale 0.15s ease;
+  will-change: scale;
+}
+
+.bm .bm-btn[data-hover] {
+  background: #33312c;
+}
+
+.bm .bm-btn[data-pressed] {
+  scale: 0.97;
+}
+
+.bm .bm-btn[data-done] {
+  background: var(--ss-success);
+}
+
+.bm .bm-btn--filler {
+  background: var(--ss-ink-2);
+}
+
+.bm .bm-btn-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+/* Phone: each transaction as a stacked card row. Merchant and amount, the
+   chip, then the category and the action */
+.bm .ss-stage[data-layout="compact"] .bm-row--labels {
+  display: none;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "txn amt"
+    "cat act";
+  row-gap: 10px;
+  column-gap: 10px;
+  padding: 12px 14px;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-date,
+.bm .ss-stage[data-layout="compact"] .bm-conf,
+.bm .ss-stage[data-layout="compact"] .bm-conf-bar,
+.bm .ss-stage[data-layout="compact"] .bm-row > .ss-bar:first-child {
+  display: none;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-txn {
+  grid-area: txn;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-amt,
+.bm .ss-stage[data-layout="compact"] .bm-amt-bar {
+  grid-area: amt;
+  align-self: start;
+  padding-top: 1px;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-cat {
+  grid-area: cat;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-act {
+  grid-area: act;
+}
+
+.bm .ss-stage[data-layout="compact"] .bm-head {
+  padding: 0 14px;
+}

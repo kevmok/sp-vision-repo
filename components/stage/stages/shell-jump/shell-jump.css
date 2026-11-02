@@ -1,0 +1,538 @@
+.sj .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and sides, off the bottom just past the sidebar's last product */
+.sj .sj-win {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 856px;
+  height: 600px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+/* ---- Sidebar ---- */
+
+.sj .sj-side {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+}
+
+.sj .sj-org {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 2px 6px 10px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.sj .sj-tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: #efe9dd;
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+  color: #5b4a33;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.sj .sj-org-lines {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.sj .sj-org-name {
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sj .sj-org-city {
+  color: var(--ss-text);
+  font-size: 11.5px;
+}
+
+.sj .sj-chev {
+  flex: none;
+  color: var(--ss-icon);
+}
+
+.sj .sj-group-label {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 2px 8px 0;
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.sj .sj-nav {
+  position: relative;
+}
+
+/* One object, so the selection travels from page to page */
+.sj .sj-pill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 22px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--ss-raised);
+  box-shadow: 0 0 0 1px var(--ss-line);
+  transition: transform 0.55s cubic-bezier(0.45, 0, 0.1, 1);
+  will-change: transform;
+}
+
+.sj .sj-product {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 8px;
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+}
+
+.sj .sj-product svg {
+  flex: none;
+  color: var(--ss-icon);
+  transition: color 0.25s ease;
+}
+
+.sj .sj-product[data-in] {
+  font-weight: 500;
+}
+
+.sj .sj-product[data-in] svg {
+  color: var(--ss-accent);
+}
+
+.sj .sj-badge {
+  margin-left: auto;
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+}
+
+.sj .sj-page-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin-left: 22px;
+  padding: 0 9px;
+  color: var(--ss-text);
+  font-size: 12.5px;
+  transition: color 0.25s ease;
+}
+
+.sj .sj-page-link[data-on] {
+  color: var(--ss-text-strong);
+}
+
+/* ---- Top bar ---- */
+
+.sj .sj-crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+}
+
+.sj .sj-crumb {
+  color: var(--ss-text);
+  white-space: nowrap;
+}
+
+.sj .sj-crumb--on {
+  color: var(--ss-text-strong);
+  font-weight: 500;
+}
+
+.sj .sj-crumb-sep {
+  color: var(--ss-text-faint);
+}
+
+.sj .sj-jump {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 196px;
+  height: 26px;
+  padding: 0 4px 0 9px;
+  border-radius: 7px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text);
+  font-size: 12px;
+}
+
+.sj .sj-kbds {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.sj .sj-kbds kbd {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--ss-ink-1);
+  color: var(--ss-text);
+  font-family: var(--ss-font);
+  font-size: 10.5px;
+}
+
+/* ---- Pages ---- */
+
+.sj .sj-pages {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ss-surface);
+}
+
+/* A page swap keeps the chrome: 200ms and an 8px rise on the page coming in,
+   the old page gone in half that so two titles never read at once */
+.sj .sj-view {
+  position: absolute;
+  inset: 0;
+  padding: 16px 16px 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.1s ease, transform 0s linear 0.1s;
+  will-change: transform, opacity;
+}
+
+.sj .sj-view[data-on] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.2s ease, transform 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sj .sj-title {
+  margin: 0 0 14px;
+  color: var(--ss-text-strong);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+
+.sj .sj-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.sj .sj-stat {
+  display: grid;
+  gap: 5px;
+  padding: 11px 12px 12px;
+  border-radius: 10px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.sj .sj-stat-label {
+  color: var(--ss-text);
+  font-size: 11.5px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.sj .sj-stat-value {
+  color: var(--ss-text-strong);
+  font-family: var(--ss-mono);
+  font-size: 18px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.sj .sj-of {
+  color: var(--ss-text);
+}
+
+.sj .sj-stat-sub {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.sj .sj-stat-sub[data-tone="ok"] {
+  color: var(--ss-success-text);
+}
+
+.sj .sj-stat-sub[data-tone="bad"] {
+  color: var(--ss-danger-text);
+}
+
+.sj .sj-panels {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 10px;
+}
+
+.sj .sj-panel {
+  border-radius: 10px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.sj .sj-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--ss-line);
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sj .sj-count {
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: var(--ss-ink-2);
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.sj .sj-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--ss-line-faint);
+}
+
+.sj .sj-row-lines {
+  display: grid;
+  gap: 7px;
+}
+
+.sj .sj-row-end {
+  margin-left: auto;
+}
+
+.sj .sj-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--ss-ink-3);
+}
+
+.sj .sj-dot[data-sev="bad"] {
+  background: var(--ss-danger);
+}
+
+.sj .sj-dot[data-sev="warn"] {
+  background: var(--ss-warning);
+}
+
+/* ---- Analytics chart: the plot runs off the bottom, the line well inside ---- */
+
+.sj .sj-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 400;
+}
+
+.sj .sj-legend i {
+  width: 12px;
+  height: 0;
+  margin-left: 8px;
+  border-top: 2px dashed var(--ss-icon-faint);
+}
+
+.sj .sj-legend i[data-now] {
+  border-top: 2px solid var(--ss-accent);
+}
+
+.sj .sj-plot {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+}
+
+.sj .sj-grid {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--ss-line-faint);
+}
+
+.sj .sj-plot .sj-prior,
+.sj .sj-plot .sj-now {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sj .sj-prior path {
+  stroke: var(--ss-icon-faint);
+  stroke-dasharray: 4 4;
+}
+
+/* ---- The palette ---- */
+
+.sj .sj-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 26, 23, 0.1);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.sj .sj-scrim[data-show] {
+  opacity: 1;
+}
+
+.sj .sj-cmd {
+  top: 72px;
+  left: 190px;
+  width: 540px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  --ss-popover-bg: var(--ss-raised);
+  --ss-popover-shadow: 0 0 0 1px rgba(27, 26, 23, 0.08), 0 24px 60px -12px rgba(27, 26, 23, 0.35);
+}
+
+.sj .sj-cmd-field .ss-field__box,
+.sj .sj-cmd-field[data-focused] .ss-field__box {
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 0;
+  border-bottom: 1px solid var(--ss-line);
+  background: transparent;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.sj .sj-cmd-field svg {
+  color: var(--ss-icon);
+}
+
+.sj .sj-cmd-list {
+  padding: 4px 6px 6px;
+}
+
+.sj .sj-cmd-head {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 2px 10px 0;
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* A kept layer: rows ride up as the ones above collapse */
+.sj .sj-cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 7px;
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  transition: background-color 0.12s ease;
+  will-change: transform;
+}
+
+.sj .sj-cmd-item svg {
+  flex: none;
+  color: var(--ss-icon);
+}
+
+.sj .sj-cmd-item svg.sj-ask {
+  color: var(--ss-accent);
+}
+
+.sj .sj-cmd-item[data-active] {
+  background: var(--ss-ink-1);
+}
+
+/* ---- Phone column: the app without its sidebar; the crumbs carry the jump ---- */
+
+.sj .sj-narrow {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 310px;
+  height: 580px;
+  overflow: hidden;
+  border-radius: var(--ss-radius-window);
+  background: var(--ss-surface);
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.sj .sj-narrow-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 44px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.sj .sj-narrow-search {
+  margin-left: auto;
+}
+
+.sj .ss-stage[data-layout="compact"] .sj-view {
+  padding: 14px 14px 0;
+}
+
+.sj .ss-stage[data-layout="compact"] .sj-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sj .ss-stage[data-layout="compact"] .sj-panels {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sj .ss-stage[data-layout="compact"] .sj-legend {
+  display: none;
+}
+
+.sj .ss-stage[data-layout="compact"] .sj-cmd {
+  top: 60px;
+  left: 36px;
+  width: 286px;
+}

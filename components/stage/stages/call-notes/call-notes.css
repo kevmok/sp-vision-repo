@@ -1,0 +1,540 @@
+.cn .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and sides, off the bottom just under the composer */
+.cn .cn-win {
+  position: absolute;
+  top: 32px;
+  left: 56px;
+  width: 688px;
+  height: 560px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+/* Phone column: the chat alone, a gutter from the top and sides, off the bottom */
+.cn .cn-sheet {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: grid;
+  grid-template-rows: 48px minmax(0, 1fr);
+  width: 310px;
+  height: 640px;
+  overflow: hidden;
+  border-radius: var(--ss-radius-window);
+  background: var(--ss-surface);
+  box-shadow: var(--ss-shadow-hero);
+}
+
+/* Sidebar filler */
+.cn .cn-side {
+  display: grid;
+  gap: 14px;
+  padding: 4px 10px 0;
+}
+
+.cn .cn-org {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.cn .cn-org-mark {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--ss-ink-3);
+}
+
+.cn .cn-org-lines {
+  display: grid;
+  gap: 6px;
+}
+
+.cn .cn-nav {
+  display: grid;
+  gap: 2px;
+}
+
+.cn .cn-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 26px;
+  margin-top: 4px;
+  padding: 0 6px;
+}
+
+.cn .cn-nav-group:first-child {
+  margin-top: 0;
+}
+
+.cn .cn-nav-icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--ss-ink-4);
+}
+
+.cn .cn-nav-item {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px 0 27px;
+  border-radius: var(--ss-radius-sm);
+}
+
+.cn .cn-nav-item[data-selected] {
+  background: var(--ss-raised);
+  box-shadow: 0 0 0 1px var(--ss-line);
+}
+
+/* The chat column */
+.cn .cn-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+
+.cn .cn-logo {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cn .cn-org-name {
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cn .cn-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cn .cn-pile {
+  display: flex;
+}
+
+.cn .cn-pile-av {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--ss-surface);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.cn .cn-pile-av + .cn-pile-av {
+  margin-left: -2px;
+}
+
+.cn .cn-pile-av--op {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+}
+
+.cn .cn-pile-av--sp {
+  background: var(--ss-text-strong);
+  color: #fff;
+}
+
+/* The product's outline button; one tint under the pointer, green while the
+   call runs */
+.cn .cn-start {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 112px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, scale 0.15s ease;
+  will-change: transform, scale;
+}
+
+.cn .cn-head .cn-start {
+  margin-left: auto;
+}
+
+.cn .cn-start[data-hover] {
+  background: var(--ss-ink-1);
+}
+
+.cn .cn-start[data-pressed] {
+  scale: 0.97;
+}
+
+.cn .cn-start[data-live] {
+  background: var(--ss-success-soft);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--ss-success-text);
+}
+
+.cn .cn-start-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  width: 82px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+
+.cn .cn-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--ss-success);
+  animation: cn-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cn-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.cn .cn-body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  min-height: 0;
+  /* The composer ends 32px above the stage's edge: the window runs off below */
+  padding: 0 16px 64px;
+  background: var(--ss-surface);
+}
+
+.cn .ss-stage[data-layout="compact"] .cn-body {
+  padding: 0 16px 56px;
+}
+
+/* Anchored to the composer; older messages go up under the header softly */
+.cn .cn-thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  min-height: 0;
+  padding-bottom: 18px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, #000 24px);
+}
+
+/* Everything in the thread rides up as the cards open: each keeps a layer of
+   its own, so its words don't step on whole pixels as it moves */
+.cn .cn-thread > * {
+  flex: none;
+  will-change: transform;
+}
+
+.cn .cn-msg {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: start;
+}
+
+.cn .cn-msg--real {
+  grid-template-rows: 30px auto;
+  row-gap: 2px;
+}
+
+.cn .cn-av {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--ss-ink-3);
+}
+
+.cn .cn-av--sp {
+  background: var(--ss-ink-5);
+}
+
+.cn .cn-av--op {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+  font-size: 11px;
+  font-weight: 600;
+  text-box: trim-both cap alphabetic;
+}
+
+.cn .cn-av--bot {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent);
+}
+
+.cn .cn-lines {
+  display: grid;
+  gap: 9px;
+  justify-items: start;
+  padding-top: 4px;
+}
+
+.cn .cn-lines > .ss-bar[style*="%"] {
+  justify-self: stretch;
+}
+
+.cn .cn-file {
+  margin-top: 2px;
+}
+
+.cn .cn-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+}
+
+.cn .cn-name {
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cn .cn-time {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11.5px;
+}
+
+.cn .cn-content {
+  grid-column: 2;
+  min-width: 0;
+}
+
+/* The notes and the call take the full column on a phone, under the mark */
+.cn .ss-stage[data-layout="compact"] .cn-content {
+  grid-column: 1 / -1;
+}
+
+/* The product's call card; goes quiet once it has ended */
+.cn .cn-call {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--ss-radius-md);
+  background: #fbfaf7;
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.cn .cn-call-tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.cn .cn-call[data-ended] .cn-call-tile {
+  background: var(--ss-ink-2);
+  color: var(--ss-icon);
+}
+
+.cn .cn-call-text {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cn .cn-call-title {
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.cn .cn-call-sub {
+  color: var(--ss-text);
+  font-size: 12px;
+}
+
+.cn .cn-call-link,
+.cn .cn-call-done {
+  display: block;
+  overflow: hidden;
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cn .cn-call-link {
+  color: var(--ss-text-faint);
+}
+
+.cn .cn-call-done {
+  color: var(--ss-text);
+}
+
+.cn .cn-call-state {
+  display: grid;
+  min-width: 0;
+}
+
+.cn .cn-call-state > .ss-states__item {
+  min-width: 0;
+}
+
+.cn .cn-call-action {
+  flex: none;
+}
+
+.cn .cn-join {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.cn .cn-ended {
+  display: inline-grid;
+  place-items: center end;
+  width: 52px;
+  height: 28px;
+  color: var(--ss-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* The notes: the summary, then what each person owes */
+.cn .cn-notes {
+  display: grid;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.cn .cn-summary {
+  padding: 13px 14px;
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.cn .cn-items {
+  display: grid;
+  padding: 4px 0;
+  border-top: 1px solid var(--ss-line);
+}
+
+.cn .cn-item {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) 24px;
+  gap: 10px;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px 0 14px;
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  transition: opacity 0.35s ease, translate 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform, translate;
+}
+
+.cn .cn-item:not([data-on]) {
+  opacity: 0;
+  translate: 0 4px;
+}
+
+.cn .cn-box {
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1.5px #d6d0c4;
+}
+
+.cn .cn-item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cn .cn-owner {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.cn .cn-owner--sp {
+  background: var(--ss-text-strong);
+  color: #fff;
+}
+
+.cn .cn-composer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 9px 0 13px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-faint);
+  font-size: 13.5px;
+}
+
+.cn .cn-clip {
+  flex: none;
+  color: var(--ss-icon);
+}
+
+.cn .cn-send {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  opacity: 0.35;
+}

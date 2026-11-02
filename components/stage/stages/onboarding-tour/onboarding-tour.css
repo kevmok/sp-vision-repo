@@ -1,0 +1,473 @@
+.ot .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and sides, the page running off the bottom */
+.ot .ot-win {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 816px;
+  height: 500px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.ot .ot-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 18px 20px 0;
+  background: var(--ss-surface);
+}
+
+.ot .ot-page-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  margin-bottom: 2px;
+}
+
+.ot .ot-page-title {
+  color: var(--ss-text-strong);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.ot .ot-sync {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  gap: 6px;
+  color: var(--ss-text);
+  font-size: 12px;
+}
+
+.ot .ot-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ss-success);
+}
+
+.ot .ot-outline {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: var(--ss-radius-md);
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.ot .ot-panel {
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.ot .ot-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.ot .ot-panel-title {
+  flex: 1;
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.ot .ot-num {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  word-spacing: -0.28em;
+}
+
+.ot .ot-segs {
+  display: flex;
+  gap: 4px;
+}
+
+.ot .ot-segs span {
+  width: 24px;
+  height: 6px;
+  border-radius: 999px;
+  background: #e6e1d7;
+  transition: background-color 0.3s ease;
+}
+
+.ot .ot-segs span[data-on] {
+  background: var(--ss-success);
+}
+
+.ot .ot-chip {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--ss-ink-2);
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.ot .ot-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ot .ot-step {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 14px 16px;
+}
+
+.ot .ot-step + .ot-step {
+  border-left: 1px solid var(--ss-line);
+}
+
+.ot .ot-step-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ot .ot-step-label {
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.ot .ot-step[data-done] .ot-step-label {
+  color: var(--ss-text);
+}
+
+.ot .ot-step-detail {
+  display: flex;
+  align-items: center;
+  min-height: 18px;
+  padding-left: 26px;
+  color: var(--ss-text);
+  font-size: 12px;
+}
+
+.ot .ot-meter-row {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ot .ot-meter {
+  flex: 1;
+  min-width: 0;
+  height: 6px;
+}
+
+.ot .ot-meter .ss-meter__fill {
+  background: var(--ss-accent);
+  transition: clip-path 0.7s cubic-bezier(0.45, 0, 0.1, 1), background-color 0.3s ease;
+}
+
+/* The step's mark: a dashed ring that fades to a copper one when the tour is
+   on it, then a green disc that grows over both. Border style can't
+   transition, so each look is its own layer at one size. */
+.ot .ot-mark {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.ot .ot-mark::before,
+.ot .ot-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  transition: opacity 0.3s ease;
+}
+
+.ot .ot-mark::before {
+  border: 1px dashed #bdb5a6;
+}
+
+.ot .ot-mark::after {
+  border: 1.5px solid var(--ss-accent);
+  opacity: 0;
+}
+
+.ot .ot-mark[data-current]::before {
+  opacity: 0;
+}
+
+.ot .ot-mark[data-current]::after {
+  opacity: 1;
+}
+
+.ot .ot-mark-num {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 10px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.ot .ot-mark[data-current] .ot-mark-num {
+  color: var(--ss-accent-text);
+  font-weight: 600;
+}
+
+.ot .ot-mark-tick {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--ss-success);
+  color: #fff;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity 0.2s ease, scale 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: scale;
+}
+
+.ot .ot-mark[data-done] .ot-mark-tick {
+  opacity: 1;
+  scale: 1;
+}
+
+/* Filler under the checklist */
+.ot .ot-tiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ot .ot-tile {
+  display: grid;
+  gap: 12px;
+  height: 72px;
+  align-content: center;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.ot .ot-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line-faint);
+}
+
+.ot .ot-alert-icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--ss-ink-1);
+}
+
+.ot .ot-alert-lines {
+  display: grid;
+  gap: 8px;
+}
+
+/* The tour card. Placed by `translate` from the measured step, so the glide to
+   the next step is one object; `transform` and opacity are only its arrival. */
+.ot .ot-tour {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: grid;
+  gap: 8px;
+  width: 248px;
+  padding: 14px 14px 12px;
+  border-radius: 11px;
+  background: var(--ss-raised);
+  box-shadow: 0 0 0 1px var(--ss-line), var(--ss-shadow-float);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition:
+    translate 0.8s cubic-bezier(0.45, 0, 0.1, 1),
+    opacity 0.2s ease,
+    transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: translate, transform;
+}
+
+.ot .ot-tour[data-on] {
+  opacity: 1;
+  transform: none;
+}
+
+.ot .ot-tour::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: calc(var(--ot-caret) - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 2px 0 0;
+  background: var(--ss-raised);
+  box-shadow: -1px -1px 0 var(--ss-line);
+  rotate: 45deg;
+  transition: left 0.8s cubic-bezier(0.45, 0, 0.1, 1);
+}
+
+.ot .ot-tour-step {
+  color: var(--ss-accent-text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.ot .ot-tour-title {
+  color: var(--ss-text-strong);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ot .ot-tour-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.ot .ot-skip {
+  color: var(--ss-text);
+  font-size: 12.5px;
+}
+
+.ot .ot-btn {
+  display: inline-grid;
+  place-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, scale 0.15s ease;
+  will-change: transform, scale;
+}
+
+.ot .ot-btn[data-hover] {
+  background: #33312c;
+}
+
+.ot .ot-btn[data-pressed] {
+  scale: 0.97;
+}
+
+/* Phone column: the setup card alone. Circles only, so the tour card carries
+   the step's name and its meter */
+.ot .ot-solo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 310px;
+}
+
+.ot .ot-solo .ot-setup {
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.ot .ss-stage[data-layout="compact"] .ot-panel-head {
+  padding: 0 14px;
+}
+
+.ot .ot-stepper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 18px 0;
+  border-bottom: 1px solid var(--ss-line-faint);
+}
+
+.ot .ot-stepper::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  right: 12.5%;
+  left: 12.5%;
+  height: 1px;
+  background: var(--ss-line);
+}
+
+.ot .ot-stepper-cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.ot .ot-stepper-cell .ot-mark {
+  background: var(--ss-raised);
+  border-radius: 999px;
+}
+
+.ot .ss-stage[data-layout="compact"] .ot-tour {
+  width: 286px;
+}
+
+.ot .ot-tour-line {
+  display: grid;
+  gap: 5px;
+  width: 100%;
+  align-content: start;
+}
+
+.ot .ot-tour-value {
+  color: var(--ss-text);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ot .ot-tour-detail {
+  width: 100%;
+}
+
+.ot .ot-tour-detail > .ss-states__item {
+  width: 100%;
+}
+
+.ot .ot-tour-name {
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.3;
+}

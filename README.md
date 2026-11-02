@@ -38,8 +38,31 @@ Scripts (run them while the server is on :3311):
 | `/admin/health/[org]` | Score breakdown showing each component's inputs; active signals, each with its play, owner and "Mark done"; the org's three goals; timeline (kickoff, walkthroughs, day 30/60/90); open tickets; links to the support chat and to the operator view |
 | `/admin/inbox` | Every org's chat in one inbox, with unread counts and SLA timers (Urgent 1h, Normal 4h, Question next day). Beside the chat, an AI triage panel proposes a ticket (category, machine, priority, summary) that you can edit and accept, and keeps a triage history that includes messages marked "Not a ticket". Tickets list with open, waiting and resolved status. |
 | `/admin/plays` | Placeholder |
+| `/stage` | Stage workbench, outside the app shell: faux SP product UI (stills and short animated demos) built with the stageshow kit. `?s=<id>` opens one stage with Replay and a 390px toggle; `?capture=<id>` renders it bare in `#example` for filming. |
 
 Picking **SP Vending (admin)** in the org switcher replaces the sidebar with the SP admin area. Picking an operator brings back the operator products.
+
+## Stages
+
+`/stage` is where marketing-style product shots of SP get built. The kit lives in `components/stage/kit/` (copied from the stageshow skill, left as upstream, excluded from ESLint). `components/stage/sp-look.css` maps SP's brand tokens onto the kit's `--ss-*` tokens; put `sp-look` on every Stage. Each stage is a folder in `components/stage/stages/<id>/` and is registered in `components/stage/catalog.ts`.
+
+The index groups them by the Phase 1 app work on the roadmap, one stage per item:
+
+- `shell-jump` (UI overhaul): ⌘K jumps from Operations to Insights → Analytics, and the sidebar follows.
+- `org-chat` (org chat to SP): a photo lands in the org's one thread, SP replies, and pinning it rolls the pinned bar 2 → 3.
+- `admin-health` (SP admin view): marking a play done lifts Juniper Vending from Red to Yellow, and the band counts follow.
+- `feedback-button` (feedback button): a note about the heatmap is sent with the page attached.
+- `usage-tracking` (usage tracking): the pointer reads weekly active week by week, through the target of 7 to this week's 8/10.
+- `call-notes` (Teams call links with AI notes): a call started from the chat ends with a Teams card and AI notes in the thread.
+- `triage-ticket` (ticket triage agent): AI triage proposes a ticket from Dana's message, and Create ticket tags the message T-1047.
+- `onboarding-tour` (onboarding tour): a tour card finishes a pilot setup step and glides to the next.
+
+Other products:
+
+- `ask-quiet`: Insights → Ask answering "Which machines went quiet this week?". At phone width it switches to the Ask side sheet.
+- `bank-match`: Bank sync. A card payment matched to purchase P-1042 is confirmed, leaves the inbox, and the count rolls 13 → 12.
+
+The feedback button, usage view, AI notes and tour exist only as stages so far; they aren't in the clickable POC. To film a stage with the skill's `scripts/film.mjs`, point it at `http://localhost:3000/stage/?capture=<id>` with `--select '#example'`. Add `--reduced` to capture the poster frame.
 
 ## Health score
 

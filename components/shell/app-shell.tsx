@@ -52,6 +52,8 @@ function Topbar() {
 }
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  // The stage workbench draws its own faux UI, so it skips the app chrome
+  if (usePath().startsWith("/stage")) return <>{children}</>
   return (
     <StoreProvider>
       <BankProvider>

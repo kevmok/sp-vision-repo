@@ -1,0 +1,389 @@
+.aq .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top and left, the window running off the bottom just under the
+   composer; its right edge stays in so the bubbles and table read whole */
+.aq .aq-win {
+  position: absolute;
+  top: 32px;
+  left: 56px;
+  width: 648px;
+  height: 480px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+/* Phone column: the Ask side sheet, a gutter from the top and sides, off the bottom */
+.aq .aq-sheet {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 310px;
+  height: 568px;
+  overflow: hidden;
+  border-radius: var(--ss-radius-window);
+  background: var(--ss-surface);
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.aq .aq-sheet-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.aq .aq-sheet-icon {
+  color: var(--ss-accent);
+}
+
+.aq .aq-sheet-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+}
+
+.aq .aq-sheet-close {
+  margin-left: auto;
+  color: var(--ss-icon);
+}
+
+/* Sidebar filler */
+.aq .aq-side {
+  display: grid;
+  gap: 14px;
+  padding: 4px 10px 0;
+}
+
+.aq .aq-org {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 4px 12px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.aq .aq-org-mark {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--ss-ink-3);
+}
+
+.aq .aq-org-lines {
+  display: grid;
+  gap: 6px;
+}
+
+.aq .aq-nav {
+  display: grid;
+  gap: 2px;
+}
+
+.aq .aq-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 26px;
+  padding: 0 6px;
+  margin-top: 4px;
+}
+
+.aq .aq-nav-group:first-child {
+  margin-top: 0;
+}
+
+.aq .aq-nav-icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--ss-ink-4);
+}
+
+.aq .aq-nav-item {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px 0 27px;
+  border-radius: var(--ss-radius-sm);
+}
+
+.aq .aq-nav-item[data-selected] {
+  background: var(--ss-raised);
+  box-shadow: 0 0 0 1px var(--ss-line);
+}
+
+/* The content column */
+.aq .aq-body {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  /* The composer ends 32px above the stage's edge: the window runs off below */
+  padding: 16px 20px 64px;
+  background: var(--ss-surface);
+}
+
+.aq .ss-stage[data-layout="compact"] .aq-body {
+  padding: 14px 16px 64px;
+}
+
+/* Anchored to the composer, the way chat apps hold it; the earlier turn goes
+   up out of the window */
+.aq .aq-thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  min-height: 0;
+  padding-bottom: 18px;
+  overflow: hidden;
+  /* Older turns scroll up under the header softly, never sliced at its rule */
+  mask-image: linear-gradient(to bottom, transparent, #000 32px);
+}
+
+.aq .aq-past {
+  display: grid;
+  gap: 16px;
+}
+
+.aq .aq-past-q {
+  justify-self: end;
+}
+
+.aq .aq-past-lines {
+  display: grid;
+  gap: 9px;
+  padding-top: 6px;
+}
+
+.aq .aq-past-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 104px;
+  margin-top: 4px;
+  padding: 14px 14px 12px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.aq .aq-past-chart span {
+  flex: 1;
+  border-radius: 3px 3px 1px 1px;
+  background: var(--ss-ink-3);
+}
+
+.aq .aq-past-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.aq .aq-turn {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.aq .aq-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent);
+}
+
+.aq .aq-mark--past {
+  background: var(--ss-ink-2);
+}
+
+.aq .aq-q {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.aq .aq-q .ss-text {
+  max-width: 80%;
+  padding: 8px 14px;
+  border-radius: 16px 16px 6px 16px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 13.5px;
+  line-height: 1.4;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+.aq .aq-thinking {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  color: var(--ss-text);
+  font-size: 12.5px;
+}
+
+.aq .aq-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.aq .aq-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--ss-accent);
+  animation: aq-bounce 1s ease-in-out infinite;
+}
+
+.aq .aq-dots span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.aq .aq-dots span:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+@keyframes aq-bounce {
+  0%,
+  60%,
+  100% {
+    translate: 0 0;
+  }
+  30% {
+    translate: 0 -3px;
+  }
+}
+
+.aq .aq-answer {
+  display: grid;
+  gap: 12px;
+  padding-top: 3px;
+}
+
+.aq .aq-stream {
+  color: #2a2925;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* The answer's table, in the product's white card */
+.aq .aq-table {
+  display: grid;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+  font-size: 12.5px;
+}
+
+.aq .aq-tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px 92px;
+  gap: 12px;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-top: 1px solid var(--ss-line-faint);
+  color: var(--ss-text-strong);
+  transition: opacity 0.35s ease, translate 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* Stays on its layer so the text doesn't hop as the rise lands */
+  will-change: translate;
+}
+
+/* In the sheet the table takes the full column, under the answer's mark */
+.aq .aq-table[data-compact] {
+  margin-left: -36px;
+}
+
+.aq .aq-table[data-compact] .aq-tr {
+  grid-template-columns: minmax(0, 1fr) 84px;
+}
+
+.aq .aq-tr:not(.aq-th):not([data-on]) {
+  opacity: 0;
+  translate: 0 4px;
+}
+
+.aq .aq-th {
+  height: 32px;
+  border-top: 0;
+  color: var(--ss-text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.aq .aq-venue {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aq .aq-status {
+  color: var(--ss-text);
+}
+
+.aq .aq-badge {
+  justify-self: start;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--ss-danger-soft);
+  color: var(--ss-danger-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-box: trim-both cap alphabetic;
+}
+
+.aq .aq-num {
+  justify-self: end;
+  text-align: right;
+}
+
+.aq .aq-drop {
+  color: var(--ss-danger-text);
+  font-family: var(--ss-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* The composer, as the real one: a white box with a hairline, an ink send button */
+.aq .aq-composer .ss-field__box {
+  height: 44px;
+  padding: 0 8px 0 12px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  font-size: 13.5px;
+}
+
+.aq .aq-composer[data-focused] .ss-field__box {
+  box-shadow: inset 0 0 0 1px #cdbfae;
+}
+
+.aq .aq-send {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.aq .aq-send[data-ready] {
+  opacity: 1;
+}

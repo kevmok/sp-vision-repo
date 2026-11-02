@@ -1,0 +1,631 @@
+.oc .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* Pinned top-left, the ticket column off the right, the page off the bottom.
+   The thread stays whole and its composer keeps the stage's gutter */
+.oc .oc-win {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 1016px;
+  height: 540px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.oc .oc-page {
+  display: grid;
+  grid-template-columns: 600px 380px;
+  gap: 12px;
+  height: 100%;
+  padding: 12px;
+  background: var(--ss-surface);
+}
+
+/* Phone column: the thread alone, a gutter from the top and sides */
+.oc .oc-solo {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 310px;
+  height: 580px;
+}
+
+.oc .oc-solo .oc-chat {
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.oc .oc-chat {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.oc .oc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.oc .oc-mark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.oc .oc-title {
+  color: var(--ss-text-strong);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.oc .oc-online {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 6px;
+  background: var(--ss-success-soft);
+  color: var(--ss-success-text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.oc .oc-online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--ss-success);
+}
+
+.oc .oc-pile {
+  display: flex;
+  margin-left: auto;
+}
+
+.oc .oc-pile .oc-av {
+  width: 24px;
+  height: 24px;
+  box-shadow: 0 0 0 2px var(--ss-raised);
+  font-size: 8.5px;
+}
+
+.oc .oc-pile .oc-av + .oc-av {
+  margin-left: -3px;
+}
+
+.oc .oc-call {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.oc .oc-call--icon {
+  justify-content: center;
+  width: 30px;
+  margin-left: auto;
+  padding: 0;
+}
+
+/* The pinned bar */
+.oc .oc-pins {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+}
+
+.oc .oc-pins-icon {
+  flex: none;
+  color: var(--ss-accent);
+}
+
+.oc .oc-pins-count {
+  display: inline-flex;
+  flex: none;
+  gap: 8px;
+  color: var(--ss-text-strong);
+  font-family: var(--ss-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.oc .oc-pin-row {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.oc .oc-pin-chip {
+  will-change: transform;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 6px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+  color: var(--ss-text-strong);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.oc .oc-ic-sheet {
+  color: var(--ss-success);
+}
+
+.oc .oc-ic-photo {
+  color: var(--ss-accent);
+}
+
+/* The new pin opens its own width, so the row makes room instead of jumping */
+.oc .oc-pin-new {
+  display: grid;
+  grid-template-columns: 0fr;
+  opacity: 0;
+  margin-left: -6px;
+  transition: grid-template-columns 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease 0.2s, margin-left 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.oc .oc-pin-new > span {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.oc .oc-pin-new[data-on] {
+  grid-template-columns: 1fr;
+  margin-left: 0;
+  opacity: 1;
+}
+
+/* Anchored to the composer; older turns fade under the pinned bar */
+.oc .oc-thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+  padding: 0 16px 14px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, #000 28px);
+}
+
+.oc .oc-old {
+  display: grid;
+  flex: none;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.oc .oc-old + .oc-old {
+  margin-top: 14px;
+}
+
+/* Spacing lives inside each message's Collapse, so a closed one takes no gap */
+.oc .oc-slot {
+  padding-top: 14px;
+}
+
+.oc .oc-old-lines {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  padding-top: 4px;
+}
+
+.oc .oc-old-lines > .ss-bar[style*="%"] {
+  justify-self: stretch;
+}
+
+.oc .oc-old-file {
+  margin-top: 2px;
+}
+
+.oc .oc-av {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.oc .oc-av[data-who="ml"],
+.oc .oc-av[data-who="dw"] {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+}
+
+.oc .oc-av[data-who="sp"] {
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 10px;
+}
+
+.oc .oc-av--filler {
+  background: var(--ss-ink-3);
+}
+
+.oc .oc-av--filler[data-dark] {
+  background: var(--ss-ink-5);
+}
+
+/* A message. Its hover fill sits behind the content, past the thread's inset */
+.oc .oc-msg {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.oc .oc-msg::before {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+  border-radius: 8px;
+  background: var(--ss-surface);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.oc .oc-msg[data-target="msg"][data-hover]::before {
+  opacity: 1;
+}
+
+.oc .oc-msg > * {
+  position: relative;
+}
+
+.oc .oc-msg-body {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.oc .oc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 18px;
+}
+
+.oc .oc-name {
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.oc .oc-time {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.oc .oc-msg-pin {
+  color: var(--ss-accent);
+  opacity: 0;
+  scale: 0.7;
+  transition: opacity 0.2s ease, scale 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.oc .oc-msg-pin[data-on] {
+  opacity: 1;
+  scale: 1;
+}
+
+.oc .oc-text {
+  margin: 0;
+  color: #2a2925;
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* The product's attachment chip */
+.oc .oc-file {
+  will-change: transform;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  margin-top: 2px;
+  padding: 0 10px 0 7px;
+  border-radius: 8px;
+  background: #fbfaf7;
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.oc .oc-file-mark {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent);
+}
+
+.oc .oc-file-name {
+  color: var(--ss-text-strong);
+  font-weight: 500;
+}
+
+.oc .oc-file-size {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+}
+
+/* The hover toolbar, on the message's top-right */
+.oc .oc-tools {
+  position: absolute;
+  top: -12px;
+  right: 0;
+  display: flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line), 0 1px 2px rgb(27 26 23 / 0.06);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.oc .oc-msg[data-hover] .oc-tools {
+  opacity: 1;
+}
+
+.oc .oc-tool {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--ss-icon);
+  transition: background-color 0.15s ease, color 0.15s ease, scale 0.12s ease;
+  will-change: scale;
+}
+
+.oc .oc-tool[data-hover] {
+  background: var(--ss-ink-1);
+  color: var(--ss-text-strong);
+}
+
+.oc .oc-tool[data-pressed] {
+  scale: 0.92;
+}
+
+.oc .oc-tool[data-on] {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent);
+}
+
+/* The composer keeps the stage's gutter while the card runs off the bottom */
+.oc .oc-composer {
+  margin: 0 16px 44px;
+  padding-top: 12px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  transition: box-shadow 0.2s ease;
+}
+
+.oc .oc-composer[data-focus] {
+  box-shadow: inset 0 0 0 1px #cdbfae, 0 0 0 3px color-mix(in srgb, var(--ss-accent) 10%, transparent);
+}
+
+.oc .oc-composer-files {
+  display: flex;
+  padding: 0 12px 10px;
+}
+
+.oc .oc-composer-files .oc-file {
+  margin-top: 0;
+}
+
+.oc .oc-input {
+  position: relative;
+  min-height: 42px;
+  padding: 0 14px;
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  line-height: 21px;
+}
+
+.oc .oc-placeholder {
+  position: absolute;
+  left: 14px;
+  color: var(--ss-text);
+  transition: opacity 0.14s ease;
+}
+
+.oc .oc-placeholder[data-hide] {
+  opacity: 0;
+  transition: none;
+}
+
+.oc .oc-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 16px;
+  margin-left: 1px;
+  vertical-align: -3px;
+  background: var(--ss-text-strong);
+  opacity: 0;
+}
+
+.oc .oc-caret[data-show] {
+  animation: oc-blink 1.05s steps(1) infinite;
+}
+
+.oc .oc-caret[data-typing] {
+  animation: none;
+  opacity: 1;
+}
+
+.oc .oc-composer-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 8px;
+}
+
+.oc .oc-attach {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  color: var(--ss-icon);
+  transition: background-color 0.15s ease, scale 0.12s ease;
+  will-change: scale;
+}
+
+.oc .oc-attach[data-hover] {
+  background: var(--ss-ink-1);
+}
+
+.oc .oc-attach[data-pressed] {
+  scale: 0.92;
+}
+
+.oc .oc-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 7px;
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 500;
+  opacity: 0.5;
+  transition: opacity 0.2s ease, background-color 0.2s ease, scale 0.12s ease;
+  will-change: transform, scale;
+}
+
+.oc .oc-send[data-ready] {
+  opacity: 1;
+}
+
+.oc .oc-send[data-ready][data-hover] {
+  background: #33312c;
+}
+
+.oc .oc-send[data-pressed] {
+  scale: 0.97;
+}
+
+/* The ticket column, filler */
+.oc .oc-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.oc .oc-card {
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.oc .oc-card-head {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.oc .oc-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 56px;
+  padding: 0 16px;
+  border-top: 1px solid var(--ss-line-faint);
+}
+
+.oc .oc-card-row:first-of-type {
+  border-top: 0;
+}
+
+.oc .oc-card-row--short {
+  height: 42px;
+}
+
+.oc .oc-card-lines {
+  display: grid;
+  gap: 8px;
+}
+
+/* Phone column */
+.oc .ss-stage[data-layout="compact"] .oc-head {
+  height: 46px;
+  padding: 0 12px;
+}
+
+.oc .ss-stage[data-layout="compact"] .oc-pins {
+  padding: 0 12px;
+}
+
+.oc .ss-stage[data-layout="compact"] .oc-thread {
+  padding: 0 12px 12px;
+}
+
+.oc .ss-stage[data-layout="compact"] .oc-composer {
+  margin: 0 12px 48px;
+}
+
+@keyframes oc-blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+}

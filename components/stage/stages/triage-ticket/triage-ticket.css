@@ -1,0 +1,355 @@
+.tt .ss-stage {
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+/* The product: the org's chat, pinned top-left, off the bottom */
+.tt .tt-win {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 600px;
+  height: 480px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.tt .tt-call {
+  width: 92px;
+  height: 26px;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px var(--ss-line);
+}
+
+.tt .tt-chat {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  padding: 0 20px 60px;
+  background: var(--ss-surface);
+}
+
+/* Anchored to the composer; the messages keep to a column, so the chat's
+   right margin is free for the panel */
+.tt .tt-thread {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  max-width: 384px;
+  min-height: 0;
+  padding-bottom: 20px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, #000 28px);
+}
+
+.tt .tt-msg {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.tt .tt-av {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--ss-ink-3);
+}
+
+.tt .tt-av--sp {
+  background: var(--ss-ink-5);
+}
+
+/* The operator's initials in the product's copper-tint disc */
+.tt .tt-av--dw {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+  font-size: 11px;
+  font-weight: 600;
+  text-box: trim-both cap alphabetic;
+}
+
+.tt .tt-lines {
+  display: grid;
+  gap: 9px;
+  justify-items: start;
+  padding-top: 4px;
+}
+
+.tt .tt-lines > .ss-bar[style*="%"] {
+  justify-self: stretch;
+}
+
+.tt .tt-react {
+  margin-top: 2px;
+}
+
+.tt .tt-day {
+  display: flex;
+  justify-content: center;
+  padding-left: 42px;
+}
+
+.tt .tt-msg--new .tt-lines {
+  gap: 4px;
+  padding-top: 0;
+}
+
+.tt .tt-meta,
+.tt .tt-prop-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+}
+
+.tt .tt-name {
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tt .tt-time {
+  color: var(--ss-text);
+  font-family: var(--ss-mono);
+  font-size: 11.5px;
+}
+
+.tt .tt-text {
+  margin: 0;
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* "Proposed" is dashed copper; the ticket it becomes is solid */
+.tt .tt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ss-accent) 45%, transparent);
+  color: var(--ss-accent-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.tt .tt-tag[data-tagged] {
+  background: var(--ss-accent-soft);
+  box-shadow: inset 0 0 0 1px transparent;
+  font-family: var(--ss-mono);
+}
+
+.tt .tt-composer {
+  display: flex;
+  align-items: center;
+  max-width: 384px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-faint);
+  font-size: 13px;
+}
+
+/* The tool: in front, straddling the chat's right edge over its margin */
+.tt .tt-panel {
+  position: absolute;
+  top: 76px;
+  left: 508px;
+  width: 300px;
+  border-radius: 12px;
+  background: var(--ss-raised);
+  box-shadow: var(--ss-shadow-satellite);
+}
+
+.tt .ss-stage[data-layout="compact"] .tt-panel {
+  top: 24px;
+  left: 24px;
+  width: 310px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.tt .tt-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.tt .tt-bot {
+  color: var(--ss-accent);
+}
+
+.tt .tt-panel-title {
+  color: var(--ss-text-strong);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.tt .tt-proposal {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px 16px;
+  border-bottom: 1px solid var(--ss-line);
+}
+
+.tt .tt-badge {
+  margin-left: auto;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: var(--ss-warning-soft);
+  color: var(--ss-warning-text);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.tt .tt-badge[data-tagged] {
+  background: var(--ss-accent-soft);
+  color: var(--ss-accent-text);
+  font-family: var(--ss-mono);
+}
+
+.tt .tt-quote {
+  margin: 0 0 2px;
+  padding-left: 12px;
+  border-left: 2px solid var(--ss-line);
+  color: var(--ss-text-strong);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.tt .tt-field {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 32px;
+}
+
+.tt .tt-label {
+  color: var(--ss-text);
+  font-size: 12px;
+}
+
+/* Each control fills its column, as the product's form does */
+.tt .tt-value {
+  display: grid;
+  min-width: 0;
+}
+
+.tt .tt-value > .ss-states__item {
+  width: 100%;
+}
+
+.tt .tt-value .tt-select,
+.tt .tt-value .tt-seg {
+  flex: 1;
+}
+
+.tt .tt-pending {
+  margin-left: 12px;
+}
+
+.tt .tt-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  border-radius: var(--ss-radius-md);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-strong);
+  font-size: 13px;
+}
+
+.tt .tt-select svg {
+  flex: none;
+  color: var(--ss-icon);
+}
+
+.tt .tt-seg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 32px;
+  overflow: hidden;
+  border-radius: var(--ss-radius-md);
+  box-shadow: inset 0 0 0 1px #e1ddd4;
+  color: var(--ss-text-strong);
+  font-size: 12.5px;
+}
+
+.tt .tt-seg span {
+  display: grid;
+  place-items: center;
+}
+
+.tt .tt-seg span + span {
+  border-left: 1px solid #e1ddd4;
+}
+
+.tt .tt-seg span[data-on] {
+  background: var(--ss-text-strong);
+  color: #fff;
+}
+
+.tt .tt-create {
+  display: grid;
+  place-items: center;
+  height: 34px;
+  margin-top: 4px;
+  border-radius: var(--ss-radius-md);
+  background: var(--ss-text-strong);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.25s ease, scale 0.15s ease;
+  will-change: scale;
+}
+
+.tt .tt-create[data-hover] {
+  background: #33312c;
+}
+
+.tt .tt-create[data-pressed] {
+  scale: 0.98;
+}
+
+.tt .tt-create[data-done] {
+  background: var(--ss-success);
+}
+
+.tt .tt-create-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+/* Earlier triage, filler, running off the bottom */
+.tt .tt-history {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 58px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--ss-line-faint);
+}
+
+.tt .tt-history-lines {
+  display: grid;
+  gap: 8px;
+}
