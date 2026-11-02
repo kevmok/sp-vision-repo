@@ -84,4 +84,4 @@ Stack: Next.js 16 (App Router), React 19, TypeScript, Tailwind v4, lucide-react,
 
 https://sp-pocs.mok-kevin11.workers.dev (static export on Cloudflare Workers static assets; `noindex` via robots.txt).
 
-The app is exported as static HTML (`output: "export"` in `next.config.ts`), so it needs no server. To redeploy: `pnpm run deploy` (needs `wrangler login`). Screenshots are copied into `public/screenshots/` so Notion can show them by URL.
+The app is exported as static HTML (`output: "export"` in `next.config.ts`), so it needs no server. Every push to `main` deploys through `.github/workflows/deploy.yml`, using the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repo secrets. To deploy by hand, run `pnpm run deploy` (needs `wrangler login`). Screenshots are copied into `public/screenshots/` so Notion can show them by URL.
